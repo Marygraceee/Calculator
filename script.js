@@ -79,11 +79,9 @@ if (currentValue !== "" && operator !== null && previousValue !== ""){
 
 function math(currentValue, previousValue, operator){
     document.addEventListener("click", (e) => {
-        if (e.target.className === "equal" && operator.textContent === "+" && result === ""){
-            result = currentValue + previousValue
-console.log(result)
-        } 
-        
+        if (e.target.className === "equal" && operator === "+" && result === "" && currentValue !== "" && previousValue !== ""){
+            console.log(e.target)
+        }     
     })  
 }
         
