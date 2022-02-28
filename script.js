@@ -82,14 +82,24 @@ if (currentValue !== "" && operator !== null && previousValue !== ""){
 function math(){
     document.addEventListener("click", (e) => {
         if (e.target.className === "equal" && operator === "+" && result === "" && currentValue !== "" && previousValue !== ""){
-            result = parseInt(currentValue) + parseInt(previousValue)
+            result = parseFloat(currentValue) + parseFloat(previousValue)
             currentNumber.innerText = `${result}`
             previousNumber.innerText = ""
+            currentValue = result
+            previousValue = ""
+            operator = null
+            result = ""
+          
         } 
         if (e.target.className === "equal" && operator === "/" && result === "" && currentValue !== "" && previousValue !== "" && previousValue !== "0"){
-            result = parseInt(currentValue) / parseInt(previousValue)
+            result = parseFloat(currentValue) / parseFloat(previousValue)
             currentNumber.innerText = `${result}`
             previousNumber.innerText = ""
+            currentValue = result
+            previousValue = ""
+            operator = null
+            result = ""
+            
         } 
         if (e.target.className === "equal" && operator === "/" && result === "" && currentValue !== "" && previousValue === "0"){
         
@@ -98,16 +108,81 @@ function math(){
         } 
         
         if (e.target.className === "equal" && operator === "*" && result === "" && currentValue !== "" && previousValue !== ""){
-            result = parseInt(currentValue) * parseInt(previousValue)
+            result = parseFloat(currentValue) * parseFloat(previousValue)
             currentNumber.innerText = `${result}`
             previousNumber.innerText = ""
+            currentValue = result
+            previousValue = ""
+            operator = null
+            result = ""
+           
         } 
         if (e.target.className === "equal" && operator === "-" && result === "" && currentValue !== "" && previousValue !== ""){
-            result = parseInt(currentValue) - parseInt(previousValue)
+            result = parseFloat(currentValue) - parseFloat(previousValue)
             currentNumber.innerText = `${result}`
             previousNumber.innerText = ""
+            currentValue = result
+            previousValue = ""
+            operator = null
+            result = ""
+           
         }    
     })   
+}
+
+
+function otherOperator(){
+    document.addEventListener("click", (e) => {
+        if (e.target.className === "operations" && operator === "+" && result === "" && currentValue !== "" && previousValue !== ""){
+            result = parseFloat(currentValue) + parseFloat(previousValue)
+            currentNumber.innerText = `${result}` + " " + e.target.textContent
+            previousNumber.innerText = ""
+            currentValue = result
+            previousValue = ""
+            operator = `${e.target.textContent}`
+            result = ""
+            console.log(operator)
+            console.log(currentValue)
+            console.log(previousValue)
+        } 
+        if (e.target.className === "operations" && operator === "/" && result === "" && currentValue !== "" && previousValue !== "" && previousValue !== "0"){
+            result = parseFloat(currentValue) / parseFloat(previousValue)
+            currentNumber.innerText = `${result}` + " " + e.target.textContent
+            previousNumber.innerText = ""
+            currentValue = result
+            previousValue = ""
+            operator = `${e.target.textContent}`
+            result = ""
+            console.log(operator)
+            console.log(currentValue)
+            console.log(previousValue)
+        } 
+        
+        if (e.target.className === "operations" && operator === "*" && result === "" && currentValue !== "" && previousValue !== ""){
+            result = parseFloat(currentValue) * parseFloat(previousValue)
+            currentNumber.innerText = `${result}` + " " + e.target.textContent
+            previousNumber.innerText = ""
+            currentValue = result
+            previousValue = ""
+            operator = `${e.target.textContent}`
+            result = ""
+            console.log(operator)
+            console.log(currentValue)
+            console.log(previousValue)
+        } 
+        if (e.target.className === "operations" && operator === "-" && result === "" && currentValue !== "" && previousValue !== ""){
+            result = parseFloat(currentValue) - parseFloat(previousValue)
+            currentNumber.innerText = `${result}` + " " + e.target.textContent
+            previousNumber.innerText = ""
+            currentValue = result
+            previousValue = ""
+            operator = `${e.target.textContent}`
+            result = ""
+            console.log(operator)
+            console.log(currentValue)
+            console.log(previousValue)
+        }    
+    })
 }
         
 
@@ -115,6 +190,7 @@ function math(){
 selectFirstValue()
 selectOperator()
 selectPrevious()
+otherOperator()
 math()
 
 
