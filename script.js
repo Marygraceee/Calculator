@@ -53,15 +53,17 @@ function selectPrevious(){
 
 
 
-let deleteEverything = document.addEventListener("click", (e) => {
-    if (e.target.className === "deleteall"){
-        currentValue = ""
-        previousValue = ""
-       currentNumber.innerText = ""
-       previousNumber.innerText = ""
-        operator = null
-    }
-})
+function deleteEverything(){
+currentValue = ""
+previousValue = ""
+operator = null
+currentNumber.innerText = ""
+previousNumber.innerText = ""
+result = ""
+}
+
+
+
 
 function updateOutput(){
     if (currentValue !== ""){
@@ -77,12 +79,35 @@ if (currentValue !== "" && operator !== null && previousValue !== ""){
 }
 
 
-function math(currentValue, previousValue, operator){
+function math(){
     document.addEventListener("click", (e) => {
         if (e.target.className === "equal" && operator === "+" && result === "" && currentValue !== "" && previousValue !== ""){
-            console.log(e.target)
-        }     
-    })  
+            result = parseInt(currentValue) + parseInt(previousValue)
+            currentNumber.innerText = `${result}`
+            previousNumber.innerText = ""
+        } 
+        if (e.target.className === "equal" && operator === "/" && result === "" && currentValue !== "" && previousValue !== "" && previousValue !== "0"){
+            result = parseInt(currentValue) / parseInt(previousValue)
+            currentNumber.innerText = `${result}`
+            previousNumber.innerText = ""
+        } 
+        if (e.target.className === "equal" && operator === "/" && result === "" && currentValue !== "" && previousValue === "0"){
+        
+            currentNumber.innerText = "Can't divide by 0!"
+            previousNumber.innerText = ""
+        } 
+        
+        if (e.target.className === "equal" && operator === "*" && result === "" && currentValue !== "" && previousValue !== ""){
+            result = parseInt(currentValue) * parseInt(previousValue)
+            currentNumber.innerText = `${result}`
+            previousNumber.innerText = ""
+        } 
+        if (e.target.className === "equal" && operator === "-" && result === "" && currentValue !== "" && previousValue !== ""){
+            result = parseInt(currentValue) - parseInt(previousValue)
+            currentNumber.innerText = `${result}`
+            previousNumber.innerText = ""
+        }    
+    })   
 }
         
 
@@ -90,7 +115,7 @@ function math(currentValue, previousValue, operator){
 selectFirstValue()
 selectOperator()
 selectPrevious()
-math(currentValue, previousValue, operator)
+math()
 
 
 
