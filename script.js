@@ -18,10 +18,10 @@ let result = ""
 
 function selectFirstValue(){
         document.addEventListener("click", (e) => {
-            if (currentValue === "" && e.target.className === "numbers" && operator === null){
+            if (currentValue === "" && operator === null && (e.target.className === "numbers" || e.target.className === "decimal")){
                 currentValue = currentValue + `${e.target.textContent}`
                 
-            } else if (currentValue !== "" && operator === null && previousValue === "" && e.target.className === "numbers"){
+            } else if (currentValue !== "" && operator === null && previousValue === "" && (e.target.className === "numbers" || e.target.className === "decimal")){
                 currentValue = currentValue + `${e.target.textContent}`
             }
           
@@ -42,9 +42,9 @@ function selectFirstValue(){
 
 function selectPrevious(){
     document.addEventListener("click", (e) => {
-        if (currentValue !== "" && operator !== null && e.target.className === "numbers" && previousValue === ""){
+        if (currentValue !== "" && operator !== null && previousValue === "" && (e.target.className === "numbers" || e.target.className === "decimal")){
             previousValue = previousValue + `${e.target.textContent}`
-        } else if (currentValue !== "" && operator !== null && e.target.className === "numbers" && previousValue !== ""){
+        } else if (currentValue !== "" && operator !== null && previousValue !== "" && (e.target.className === "numbers" || e.target.className === "decimal")){
             previousValue = previousValue + `${e.target.textContent}`
         }
         updateOutput()
@@ -184,6 +184,20 @@ function otherOperator(){
         }    
     })
 }
+
+
+function backspace(){
+    document.addEventListener("click", (e) => {
+if (currentValue !== "" && e.target.className === "delete" && previousValue === "" && operator === null){
+   currentValue = currentValue.slice(0, -1)
+  currentNumber.innerText = `${currentValue}`
+}
+if (operator !== null && e.target.className === "delete" && currentValue !== ""){
+    previousValue = previousValue.slice(0, -1)
+    currentNumber.innerText = `${previousValue}`
+}
+    })
+}
         
 
 
@@ -191,6 +205,7 @@ selectFirstValue()
 selectOperator()
 selectPrevious()
 otherOperator()
+backspace()
 math()
 
 
