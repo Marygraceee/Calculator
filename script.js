@@ -14,8 +14,9 @@ let previousNumber = document.querySelector(".previousnumber")
 let currentValue = ""
 let previousValue = ""
 let operator = null
+let result = ""
 
-function selectValues(){
+function selectFirstValue(){
         document.addEventListener("click", (e) => {
             if (currentValue === "" && e.target.className === "numbers" && operator === null){
                 currentValue = currentValue + `${e.target.textContent}`
@@ -23,12 +24,34 @@ function selectValues(){
             } else if (currentValue !== "" && operator === null && previousValue === "" && e.target.className === "numbers"){
                 currentValue = currentValue + `${e.target.textContent}`
             }
-            console.log(currentValue)
-          currentNumber.innerText = currentValue
+          
+          updateOutput()
         })
-   
-   
+   }
+
+   function selectOperator() {
+       document.addEventListener("click", (e) => {
+           if (currentValue !== "" && e.target.className === "operations" && operator === null){
+               operator = `${e.target.textContent}`
+
+           } else if (operator !== null) return
+        updateOutput()     
+       })  
+   }
+
+
+function selectPrevious(){
+    document.addEventListener("click", (e) => {
+        if (currentValue !== "" && operator !== null && e.target.className === "numbers" && previousValue === ""){
+            previousValue = previousValue + `${e.target.textContent}`
+        } else if (currentValue !== "" && operator !== null && e.target.className === "numbers" && previousValue !== ""){
+            previousValue = previousValue + `${e.target.textContent}`
+        }
+        updateOutput()
+    })
 }
+
+
 
 let deleteEverything = document.addEventListener("click", (e) => {
     if (e.target.className === "deleteall"){
@@ -40,9 +63,36 @@ let deleteEverything = document.addEventListener("click", (e) => {
     }
 })
 
-selectValues()
+function updateOutput(){
+    if (currentValue !== ""){
+    currentNumber.innerText = currentValue 
+    }
+ if (currentValue !== "" && operator !== null){
+    currentNumber.innerText = currentValue + " " + operator
+} 
+if (currentValue !== "" && operator !== null && previousValue !== ""){
+    previousNumber.innerText = currentValue + " " + operator
+    currentNumber.innerText = previousValue
+}
+}
 
 
+function math(currentValue, previousValue, operator){
+    document.addEventListener("click", (e) => {
+        if (e.target.className === "equal" && operator.textContent === "+" && result === ""){
+            result = currentValue + previousValue
+console.log(result)
+        } 
+        
+    })  
+}
+        
+
+
+selectFirstValue()
+selectOperator()
+selectPrevious()
+math(currentValue, previousValue, operator)
 
 
 
